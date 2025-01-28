@@ -8,4 +8,8 @@ cask 'neovim-nightly' do
   homepage 'https://neovim.io/'
 
   binary "nvim-macos-#{arch}/bin/nvim"
+  postflight do
+    system_command '/usr/bin/xattr',
+                   args: ['-d', 'com.apple.quarantine', "#{staged_path}/nvim-macos-#{arch}/bin/nvim"]
+  end
 end
